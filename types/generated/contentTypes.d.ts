@@ -373,6 +373,38 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiHomePageBannerHomePageBanner
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'home_page_banners';
+  info: {
+    displayName: 'Home Page Banner';
+    pluralName: 'home-page-banners';
+    singularName: 'home-page-banner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Banner_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Text;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-page-banner.home-page-banner'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHomepageHomepage extends Struct.CollectionTypeSchema {
   collectionName: 'homepages';
   info: {
@@ -395,6 +427,37 @@ export interface ApiHomepageHomepage extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     paragraph: Schema.Attribute.Blocks;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNewsSectionNewsSection extends Struct.CollectionTypeSchema {
+  collectionName: 'news_sections';
+  info: {
+    displayName: 'news-section';
+    pluralName: 'news-sections';
+    singularName: 'news-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    articleUrl: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::news-section.news-section'
+    > &
+      Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
@@ -912,7 +975,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::home-page-banner.home-page-banner': ApiHomePageBannerHomePageBanner;
       'api::homepage.homepage': ApiHomepageHomepage;
+      'api::news-section.news-section': ApiNewsSectionNewsSection;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

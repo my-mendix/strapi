@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "news_sections",
+  "info": {
+    "singularName": "news-section",
+    "pluralName": "news-sections",
+    "displayName": "news-section"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "articleUrl": {
+      "type": "string"
+    }
+  }
+}
